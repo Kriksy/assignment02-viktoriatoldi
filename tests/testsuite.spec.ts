@@ -4,6 +4,7 @@ import { APIHelper } from "./apiHelpers";
 
 // Request context is reused by all tests in the file.
 let apiContext: APIRequestContext;
+let apiHelper: APIHelper;
 
 // Run before all tests in file
 test.beforeAll("Login", async ({ playwright, request }) => {
@@ -35,11 +36,28 @@ test.afterAll(async ({}) => {
 });
 
 test.describe("Test suite backend v1", () => {
-  let apiHelper: APIHelper;
-
   test.beforeAll("Setup API Helper", () => {
-    apiHelper = new APIHelper("/");
+    apiHelper = new APIHelper("/", apiContext);
   });
 
-  test("Test case: Login", async ({}) => {});
+  test("Create Client", async ({}) => {
+    const payload = {
+      name: faker.person.fullName,
+      email: faker.internet.email,
+      telephone: faker.phone.number,
+    };
+
+    const createClientResponse = await apiHelper.createClient(payload);
+    expect(createClientResponse.ok()).toBeTruthy();
+    expect(createClientResponse.status()).toBe(200);
+
+    const jsonApiResponse = await createClientResponse.json();
+
+    // expect(jsonApiResponse).toMatchObject(
+    //   expect.objectContaining({
+    //     // created: payload.name,
+    //     id: "14",
+    //   })
+    // );
+  });
 });
