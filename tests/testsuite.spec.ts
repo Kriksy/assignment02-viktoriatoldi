@@ -5,6 +5,7 @@ import { APIHelper } from "./apiHelpers";
 // Request context is reused by all tests in the file.
 let apiContext: APIRequestContext;
 
+// Run before all tests in file
 test.beforeAll("Login", async ({ playwright, request }) => {
   const loginResponse = await request.post("/api/login", {
     data: {
@@ -27,6 +28,7 @@ test.beforeAll("Login", async ({ playwright, request }) => {
   });
 });
 
+// Run after all tests in file
 test.afterAll(async ({}) => {
   // Dispose all responses.
   await apiContext.dispose();
