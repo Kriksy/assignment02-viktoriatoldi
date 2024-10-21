@@ -28,7 +28,7 @@ test.beforeAll("Setup x-user-auth", async ({ playwright, request }) => {
 // Run after all tests in file
 test.afterAll(async ({}) => {
   // Dispose all responses.
-  // await apiContext.dispose();
+  await apiContext.dispose();
 });
 
 test.describe("Test suite backend v1", () => {
