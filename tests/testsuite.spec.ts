@@ -44,12 +44,12 @@ test.describe("Test suite backend v1", () => {
 
     const jsonApiResponse = await createClientResponse.json();
 
-    // expect(jsonApiResponse).toMatchObject(
-    //   expect.objectContaining({
-    //     // created: payload.name,
-    //     id: "14",
-    //   })
-    // );
+    expect(jsonApiResponse).toMatchObject(
+      expect.objectContaining({
+        id: expect.any(Number),
+        created: expect.anything(),
+      })
+    );
   });
 
   test("Create Bill", async ({}) => {
@@ -65,7 +65,7 @@ test.describe("Test suite backend v1", () => {
         created: expect.anything(),
       })
     );
-    //expect(createClientResponse.ok()).toBeTruthy();
+    expect(createResponse.ok()).toBeTruthy();
     expect(createResponse.status()).toBe(200);
   });
 });
