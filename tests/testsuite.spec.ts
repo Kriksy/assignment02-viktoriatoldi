@@ -71,6 +71,7 @@ test.describe("Test suite backend v1", () => {
       expect.objectContaining({
         id: expect.any(Number),
         created: expect.anything(),
+        // value: payload.value,
       })
     );
     expect(createResponse.ok()).toBeTruthy();
@@ -97,6 +98,9 @@ test.describe("Test suite backend v1", () => {
       expect.objectContaining({
         id: expect.any(Number),
         created: expect.anything(),
+        // floor: payload.floor,
+        // number: payload.number,
+        // price: payload.price,
       })
     );
     expect(createResponse.ok()).toBeTruthy();
