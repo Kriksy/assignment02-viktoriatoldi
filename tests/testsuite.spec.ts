@@ -66,8 +66,8 @@ test.describe("Test suite backend v1", () => {
     };
 
     const createResponse = await apiHelper.createBill(payload);
-
-    expect(await createResponse.json()).toMatchObject(
+    const jsonCreateApiResponse = await createResponse.json();
+    expect(jsonCreateApiResponse).toMatchObject(
       expect.objectContaining({
         id: expect.any(Number),
         created: expect.anything(),
@@ -75,5 +75,12 @@ test.describe("Test suite backend v1", () => {
     );
     expect(createResponse.ok()).toBeTruthy();
     expect(createResponse.status()).toBe(200);
+
+    const deleteResponse = await apiHelper.deleteBillById(
+      jsonCreateApiResponse.id
+    );
+
+    expect(deleteResponse).toBeOK();
+    expect(deleteResponse.status()).toBe(200);
   });
 });

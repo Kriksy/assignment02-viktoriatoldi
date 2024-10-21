@@ -51,4 +51,10 @@ export class APIHelper {
     });
     return response;
   }
+
+  // Delete a bill by id
+  async deleteBillById(id: string) {
+    const response = await this.request.delete(`/api/bill/${id}`);
+    return response;
+  }
 }
