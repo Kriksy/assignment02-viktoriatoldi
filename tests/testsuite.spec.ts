@@ -83,4 +83,30 @@ test.describe("Test suite backend v1", () => {
     expect(deleteResponse).toBeOK();
     expect(deleteResponse.status()).toBe(200);
   });
+
+  test("Create Room", async ({}) => {
+    const payload = {
+      floor: faker.number.int({ min: 0, max: 1000 }),
+      number: faker.number.int({ min: 0, max: 1000 }),
+      price: faker.number.int({ min: 0, max: 1000 }),
+    };
+
+    const createResponse = await apiHelper.createRoom(payload);
+    const jsonCreateApiResponse = await createResponse.json();
+    expect(jsonCreateApiResponse).toMatchObject(
+      expect.objectContaining({
+        id: expect.any(Number),
+        created: expect.anything(),
+      })
+    );
+    expect(createResponse.ok()).toBeTruthy();
+    expect(createResponse.status()).toBe(200);
+
+    const deleteResponse = await apiHelper.deleteRoomById(
+      jsonCreateApiResponse.id
+    );
+
+    expect(deleteResponse).toBeOK();
+    expect(deleteResponse.status()).toBe(200);
+  });
 });

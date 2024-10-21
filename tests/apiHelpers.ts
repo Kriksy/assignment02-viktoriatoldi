@@ -44,7 +44,7 @@ export class APIHelper {
 
   // ### BILL ###
 
-  // Create a new client
+  // Create a new bill
   async createBill(payload: object) {
     const response = await this.request.post(`/api/bill/new`, {
       data: JSON.stringify(payload),
@@ -55,6 +55,22 @@ export class APIHelper {
   // Delete a bill by id
   async deleteBillById(id: string) {
     const response = await this.request.delete(`/api/bill/${id}`);
+    return response;
+  }
+
+  // ### ROOM ###
+
+  // Create a new room
+  async createRoom(payload: object) {
+    const response = await this.request.post(`/api/room/new`, {
+      data: JSON.stringify(payload),
+    });
+    return response;
+  }
+
+  // Delete a room by id
+  async deleteRoomById(id: string) {
+    const response = await this.request.delete(`/api/room/${id}`);
     return response;
   }
 }
