@@ -39,6 +39,7 @@ test.describe("Test suite backend v1", () => {
       telephone: faker.phone.number,
     };
 
+    // Create Client
     const createClientResponse = await apiHelper.createClient(payload);
     expect(createClientResponse).toBeOK();
 
@@ -50,6 +51,13 @@ test.describe("Test suite backend v1", () => {
         created: expect.anything(),
       })
     );
+
+    // Delete Client
+    const deleteClientResponse = await apiHelper.deleteClientById(
+      jsonApiResponse.id
+    );
+    expect(deleteClientResponse).toBeOK();
+    expect(deleteClientResponse.status()).toBe(200);
   });
 
   test("Create Bill", async ({}) => {
