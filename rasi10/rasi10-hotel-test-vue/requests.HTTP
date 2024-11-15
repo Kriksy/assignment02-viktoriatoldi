@@ -1,0 +1,183 @@
+
+@port={{$dotenv PORT}}
+@server=http://localhost:{{port}}
+@tester_username={{$dotenv TEST_USERNAME}}
+@tester_password={{$dotenv TEST_PASSWORD}}
+
+#
+
+### POST REQUEST TO GET AN ACCESS TOKEN
+
+POST {{server}}/api/login
+content-type: application/json
+
+{
+    "username": "{{tester_username}}",
+    "password": "{{tester_password}}"
+}
+
+### GET REQUEST TO RETRIEVE ALL CLIENTS
+# @prompt token Tester Token
+GET {{server}}/api/clients 
+content-type: application/json
+accept: application/json
+body: null
+x-user-auth:{ "username": "{{tester_username}}", "token": "{{token}}"}
+
+### CREATE A NEW CLIENT
+# @prompt token Tester Token
+# @prompt username Client Username
+# @prompt email Client Email
+# @prompt telephone Client Telephone
+POST {{server}}/api/client/new
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "id":"",
+    "name": "{{username}}",
+    "email": "{{email}}",
+    "telephone": "{{telephone}}"
+}
+
+### UPDATE A CLIENT
+# @prompt token Tester Token
+# @prompt username Client Username to update
+# @prompt client_id Client ID
+
+# @prompt updated_name Client Updated Name
+# @prompt updated_email Client Updated Email
+# @prompt updated_telephone Client Updated Telephone
+
+PUT {{server}}/api/client/{{client_id}}
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "id": "",
+    "name": "{{updated_name}}",
+    "email": "{{updated_email}}",
+    "telephone": "{{updated_telephone}}"
+}
+
+### DELETE A CLIENT
+# @prompt token Tester Token
+# @prompt username Client Username to delete
+# @prompt client_id Client ID
+DELETE {{server}}/api/client/{{client_id}}
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+#####
+
+### GET REQUEST TO RETRIEVE ALL ROOMS
+# @prompt token Tester Token
+GET {{server}}/api/rooms 
+content-type: application/json
+accept: application/json
+body: null
+x-user-auth: { "username":"{{tester_username}}","token":"{{token}}"}
+
+### CREATE A NEW ROOM
+# @prompt token Tester Token
+
+# @prompt floor Floor
+# @prompt room_number Room Number
+# @prompt price Room Price
+
+POST {{server}}/api/room/new
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "id": "",
+    "created": "",
+    "category": "double",
+    "floor": "{{floor}}",
+    "number": "{{room_number}}",
+    "available": true,
+    "price": "{{price}}",
+    "features": [
+      "balcony",
+      "sea_view",
+      "ensuite"
+    ]
+}
+
+### UPDATE A ROOM
+# @prompt token Tester Token
+# @prompt room_id Room ID
+
+# @prompt floor Floor
+# @prompt room_number Room Number
+# @prompt price Room Price
+# @prompt room_id Room ID
+PUT {{server}}/api/room/{{room_id}}
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "id": "{{room_id}}",
+    "created": "",
+    "category": "double",
+    "floor": "{{floor}}",
+    "number": "{{room_number}}",
+    "available": true,
+    "price": "{{price}}",
+    "features": [
+      "balcony",
+      "sea_view",
+      "ensuite"
+    ]
+}
+
+### DELETE A ROOM
+# @prompt token Tester Token
+# @prompt room_id Room ID
+DELETE {{server}}/api/room/{{room_id}}
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+#####
+
+### GET REQUEST TO RETRIEVE ALL BILLS
+# @prompt token Tester Token
+GET {{server}}/api/bills 
+content-type: application/json
+accept: application/json
+body: null
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+### CREATE A NEW BILL
+# @prompt token Tester Token
+
+# @prompt value Bills Value
+POST {{server}}/api/bill/new
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "value": "{{value}}",
+    "paid": false
+}
+
+### UPDATE A BILL
+# @prompt token Tester Token
+
+# @prompt bill_id Bill ID
+# @prompt value Bills Value
+
+PUT {{server}}/api/bill/{{bill_id}}
+content-type: application/json
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
+
+{
+    "value": "{{value}}",
+    "paid": false
+}
+### created time and id disappear
+
+### DELETE A BILL
+# @prompt token Tester Token
+
+# @prompt bill_id Bill ID
+DELETE {{server}}/api/bill/{{bill_id}}
+x-user-auth: {"username":"{{tester_username}}","token":"{{token}}"}
