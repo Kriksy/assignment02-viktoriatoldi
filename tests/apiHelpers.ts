@@ -64,6 +64,12 @@ export class APIHelper {
     return response;
   }
 
+  // Get bill by id
+  async getBillById(id: string) {
+    const response = await this.request.get(`/api/bill/${id}`);
+    return response;
+  }
+
   // ### ROOM ###
 
   // Create a new room

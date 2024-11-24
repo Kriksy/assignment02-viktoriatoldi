@@ -89,6 +89,21 @@ test.describe("Clients", () => {
 });
 
 test.describe("Bills", () => {
+  test("Get Bill by Id 1", async ({}) => {
+    const response = await apiHelper.getBillById("1");
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toMatchObject(
+      expect.objectContaining({
+        id: 1,
+        value: expect.any(Number),
+        created: expect.anything(),
+      })
+    );
+  });
+
   test("Create Bill", async ({}) => {
     const payload = {
       value: faker.number.int({ min: 0, max: 1000 }),
