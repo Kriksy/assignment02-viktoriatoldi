@@ -98,6 +98,16 @@ test.describe("Bills", () => {
     expect(deleteResponse).toBeOK();
     expect(deleteResponse.status()).toBe(200);
   });
+
+  test("Retrieve All Bills", async ({}) => {
+    // Get all bills
+    const response = await apiHelper.getAllBills();
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toBeTruthy();
+  });
 });
 
 test.describe("Rooms", () => {

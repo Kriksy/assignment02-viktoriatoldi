@@ -58,6 +58,12 @@ export class APIHelper {
     return response;
   }
 
+  // Retrieve all bills
+  async getAllBills() {
+    const response = await this.request.get(`/api/bills`);
+    return response;
+  }
+
   // ### ROOM ###
 
   // Create a new room
