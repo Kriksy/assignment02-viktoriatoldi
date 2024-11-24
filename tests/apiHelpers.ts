@@ -85,4 +85,11 @@ export class APIHelper {
     const response = await this.request.get(`/api/rooms`);
     return response;
   }
+
+  // ### RESERVATION ###
+  // Retrieve all reservations
+  async getAllReservations() {
+    const response = await this.request.get(`/api/reservations`);
+    return response;
+  }
 }

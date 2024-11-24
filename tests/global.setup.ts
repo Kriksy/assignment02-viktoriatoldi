@@ -36,9 +36,7 @@ setup("Login", async ({ playwright, request }) => {
 
   fs.writeFile(authFile, JSON.stringify({ username, token }), (err) => {
     if (err) {
-      console.log("Error writing file:", err);
-    } else {
-      console.log("Successfully wrote file");
+      throw new Error(`Failed to write to file: ${err}`);
     }
   });
 });

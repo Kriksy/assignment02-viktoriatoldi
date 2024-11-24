@@ -151,4 +151,16 @@ test.describe("Rooms", () => {
 
     expect(jsonApiResponse).toBeTruthy();
   });
+
+  test.describe("Reservations", () => {
+    test("Retrieve All Reservations", async ({}) => {
+      // Get all reservations
+      const response = await apiHelper.getAllReservations();
+      expect(response).toBeOK();
+
+      const jsonApiResponse = await response.json();
+
+      expect(jsonApiResponse).toBeTruthy();
+    });
+  });
 });
