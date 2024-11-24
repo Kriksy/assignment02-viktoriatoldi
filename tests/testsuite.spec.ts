@@ -31,7 +31,7 @@ test.afterAll(async ({}) => {
   await apiContext.dispose();
 });
 
-test.describe("Test suite backend v1", () => {
+test.describe("Clients", () => {
   test("Create Client", async ({}) => {
     const payload = {
       name: faker.person.fullName,
@@ -59,7 +59,9 @@ test.describe("Test suite backend v1", () => {
     expect(deleteClientResponse).toBeOK();
     expect(deleteClientResponse.status()).toBe(200);
   });
+});
 
+test.describe("Bills", () => {
   test("Create Bill", async ({}) => {
     const payload = {
       value: faker.number.int({ min: 0, max: 1000 }),
@@ -71,7 +73,7 @@ test.describe("Test suite backend v1", () => {
       expect.objectContaining({
         id: expect.any(Number),
         created: expect.anything(),
-        // value: payload.value,
+        value: expect.any(Number),
       })
     );
     expect(createResponse.ok()).toBeTruthy();
@@ -84,12 +86,14 @@ test.describe("Test suite backend v1", () => {
     expect(deleteResponse).toBeOK();
     expect(deleteResponse.status()).toBe(200);
   });
+});
 
+test.describe("Rooms", () => {
   test("Create Room", async ({}) => {
     const payload = {
-      floor: faker.number.int({ min: 0, max: 1000 }),
-      number: faker.number.int({ min: 0, max: 1000 }),
-      price: faker.number.int({ min: 0, max: 1000 }),
+      floor: faker.number.int({ min: 1, max: 1000 }),
+      number: faker.number.int({ min: 1, max: 1000 }),
+      price: faker.number.int({ min: 1, max: 1000 }),
     };
 
     const createResponse = await apiHelper.createRoom(payload);
@@ -98,9 +102,9 @@ test.describe("Test suite backend v1", () => {
       expect.objectContaining({
         id: expect.any(Number),
         created: expect.anything(),
-        // floor: payload.floor,
-        // number: payload.number,
-        // price: payload.price,
+        floor: expect.any(Number),
+        number: expect.any(Number),
+        price: expect.any(Number),
       })
     );
     expect(createResponse.ok()).toBeTruthy();
