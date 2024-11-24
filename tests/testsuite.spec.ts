@@ -59,6 +59,16 @@ test.describe("Clients", () => {
     expect(deleteClientResponse).toBeOK();
     expect(deleteClientResponse.status()).toBe(200);
   });
+
+  test("Retrieve All Clients", async ({}) => {
+    // Get all clients
+    const response = await apiHelper.getAllClients();
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toBeTruthy();
+  });
 });
 
 test.describe("Bills", () => {
