@@ -67,6 +67,7 @@ test.describe("Bills", () => {
       value: faker.number.int({ min: 0, max: 1000 }),
     };
 
+    // Create Bill
     const createResponse = await apiHelper.createBill(payload);
     const jsonCreateApiResponse = await createResponse.json();
     expect(jsonCreateApiResponse).toMatchObject(
@@ -79,6 +80,7 @@ test.describe("Bills", () => {
     expect(createResponse.ok()).toBeTruthy();
     expect(createResponse.status()).toBe(200);
 
+    // Delete Bill
     const deleteResponse = await apiHelper.deleteBillById(
       jsonCreateApiResponse.id
     );
@@ -96,6 +98,7 @@ test.describe("Rooms", () => {
       price: faker.number.int({ min: 1, max: 1000 }),
     };
 
+    // Create Room
     const createResponse = await apiHelper.createRoom(payload);
     const jsonCreateApiResponse = await createResponse.json();
     expect(jsonCreateApiResponse).toMatchObject(
@@ -110,6 +113,7 @@ test.describe("Rooms", () => {
     expect(createResponse.ok()).toBeTruthy();
     expect(createResponse.status()).toBe(200);
 
+    // Delete Room
     const deleteResponse = await apiHelper.deleteRoomById(
       jsonCreateApiResponse.id
     );
