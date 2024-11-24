@@ -104,4 +104,10 @@ export class APIHelper {
     const response = await this.request.get(`/api/reservations`);
     return response;
   }
+
+  // Get reservation by id
+  async getReservationById(id: string) {
+    const response = await this.request.get(`/api/reservation/${id}`);
+    return response;
+  }
 }

@@ -204,6 +204,25 @@ test.describe("Rooms", () => {
   });
 
   test.describe("Reservations", () => {
+    test("Get Reservation by Id 1", async ({}) => {
+      const response = await apiHelper.getReservationById("1");
+      expect(response).toBeOK();
+
+      const jsonApiResponse = await response.json();
+
+      expect(jsonApiResponse).toMatchObject(
+        expect.objectContaining({
+          id: 1,
+          bill: 1,
+          client: 1,
+          room: 1,
+          start: "2020-04-01",
+          end: "2020-04-04",
+          created: expect.any(String),
+        })
+      );
+    });
+
     test("Retrieve All Reservations", async ({}) => {
       // Get all reservations
       const response = await apiHelper.getAllReservations();
