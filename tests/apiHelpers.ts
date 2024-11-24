@@ -79,4 +79,10 @@ export class APIHelper {
     const response = await this.request.delete(`/api/room/${id}`);
     return response;
   }
+
+  // Retrieve all rooms
+  async getAllRooms() {
+    const response = await this.request.get(`/api/rooms`);
+    return response;
+  }
 }

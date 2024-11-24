@@ -141,4 +141,14 @@ test.describe("Rooms", () => {
     expect(deleteResponse).toBeOK();
     expect(deleteResponse.status()).toBe(200);
   });
+
+  test("Retrieve All Rooms", async ({}) => {
+    // Get all rooms
+    const response = await apiHelper.getAllRooms();
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toBeTruthy();
+  });
 });
