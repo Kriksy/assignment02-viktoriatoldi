@@ -32,6 +32,23 @@ test.afterAll(async ({}) => {
 });
 
 test.describe("Clients", () => {
+  test("Get Client by Id 1", async ({}) => {
+    const response = await apiHelper.getClientById("1");
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toMatchObject(
+      expect.objectContaining({
+        id: 1,
+        name: "Jonas Hellman",
+        email: "jonas.hellman@example.com",
+        created: expect.anything(),
+        telephone: "070 000 0001",
+      })
+    );
+  });
+
   test("Create Client", async ({}) => {
     const payload = {
       name: faker.person.fullName,
