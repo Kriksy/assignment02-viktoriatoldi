@@ -92,6 +92,12 @@ export class APIHelper {
     return response;
   }
 
+  // Get room by id
+  async getRoomById(id: string) {
+    const response = await this.request.get(`/api/room/${id}`);
+    return response;
+  }
+
   // ### RESERVATION ###
   // Retrieve all reservations
   async getAllReservations() {

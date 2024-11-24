@@ -143,6 +143,25 @@ test.describe("Bills", () => {
 });
 
 test.describe("Rooms", () => {
+  test("Get Room by Id 1", async ({}) => {
+    const response = await apiHelper.getRoomById("1");
+    expect(response).toBeOK();
+
+    const jsonApiResponse = await response.json();
+
+    expect(jsonApiResponse).toMatchObject(
+      expect.objectContaining({
+        id: 1,
+        available: true,
+        category: "double",
+        created: expect.anything(),
+        floor: 1,
+        number: expect.any(Number),
+        price: expect.any(Number),
+      })
+    );
+  });
+
   test("Create Room", async ({}) => {
     const payload = {
       floor: faker.number.int({ min: 1, max: 1000 }),
